@@ -2,11 +2,11 @@ package lotto.validator;
 
 import lotto.exception.ExceptionMessage;
 
-public class PurChaseAmountValidator {
+public class PurchaseAmountValidator {
     private static final int MINIMUM_PURCHASE_AMOUNT = 1_000;
     private static final int MAXIMUM_PURCHASE_AMOUNT = 100_000;
 
-    private PurChaseAmountValidator() {
+    private PurchaseAmountValidator() {
         throw new AssertionError();
     }
 
