@@ -15,4 +15,16 @@ public class WinningNumbers {
         this.winningNumber = winningNumber;
         this.bonusNumber = bonusNumber;
     }
+
+    public int getMatchingNumber(Lotto purchasedLotto) {
+        return (int) winningNumber.stream()
+                .filter(num -> purchasedLotto.getNumbers().contains(num))
+                .count();
+    }
+
+    public boolean hasBonusNumber(Lotto purchasedLotto) {
+        return purchasedLotto.getNumbers()
+                .stream()
+                .anyMatch(num -> num.equals(bonusNumber));
+    }
 }

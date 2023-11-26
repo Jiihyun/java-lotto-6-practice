@@ -16,4 +16,8 @@ public class Lotto {
     public LottoResponse toLottoResponse() {
         return new LottoResponse(numbers);
     }
+
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
 }

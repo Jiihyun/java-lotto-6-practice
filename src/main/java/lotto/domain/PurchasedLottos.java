@@ -30,4 +30,8 @@ public class PurchasedLottos {
         return new PurchasedLottosResponse(purchasedLottoQuantity, purchasedLottoNumbersResponse);
     }
 
+    //QUESTION: 게터 어떻게 없애지
+    public List<Lotto> getPurchasedLottoNumbers() {
+        return purchasedLottoNumbers;
+    }
 }
