@@ -1,18 +1,18 @@
 package lotto.domain;
 
-import lotto.validator.PurChaseAmountValidator;
+import lotto.validator.PurchaseAmountValidator;
 
 public class PurchaseAmount {
     private static final int LOTTO_PRICE = 1_000;
     private final int purchaseAmount;
 
     public PurchaseAmount(int purchaseAmount) {
-        PurChaseAmountValidator.validateMinimumAmount(purchaseAmount);
-        PurChaseAmountValidator.validateMultipleOfLottoPrice(purchaseAmount);
+        PurchaseAmountValidator.validateMinimumAmount(purchaseAmount);
+        PurchaseAmountValidator.validateMultipleOfLottoPrice(purchaseAmount);
         this.purchaseAmount = purchaseAmount;
     }
 
-    public int getLottoPurchaseCount() {
+    public int getPurchasedLottoQuantity() {
         return purchaseAmount / LOTTO_PRICE;
     }
 
