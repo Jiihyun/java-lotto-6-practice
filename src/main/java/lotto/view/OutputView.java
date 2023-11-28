@@ -28,6 +28,7 @@ public class OutputView {
                 drawResultsResponse.fourth(),
                 drawResultsResponse.third(),
                 drawResultsResponse.second(),
-                drawResultsResponse.first());
+                drawResultsResponse.first(),
+                drawResultsResponse.rateOfReturn());
     }
 }
