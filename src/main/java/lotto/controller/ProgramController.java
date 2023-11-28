@@ -19,14 +19,22 @@ public class ProgramController {
     }
 
     public void start() {
+        PurchasedLottos purchasedLottos = purchasedLottos();
+        draw(purchasedLottos);
+    }
+
+    private PurchasedLottos purchasedLottos() {
         PurchaseAmount purchaseAmount = inputView.readPurchaseAmount();
         PurchasedLottos purchasedLottos = PurchasedLottos.from(purchaseAmount.getPurchasedLottoQuantity());
         PurchasedLottosResponse purchasedLottosResponse = purchasedLottos.toPurchasedLottosResponse();
         outputView.printPurchasedTicket(purchasedLottosResponse);
+        return purchasedLottos;
+    }
+
+    private void draw(PurchasedLottos purchasedLottos) {
         WinningNumbers winningNumbers = inputView.readWinningNumbers();
         DrawMachine drawMachine = DrawMachine.from(winningNumbers);
         DrawResultsResponse drawResultsResponse = drawMachine.drawAll(purchasedLottos);
         outputView.printDrawResults(drawResultsResponse);
-
     }
 }
