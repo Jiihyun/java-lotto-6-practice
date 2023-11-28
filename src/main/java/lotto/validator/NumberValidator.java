@@ -1,8 +1,7 @@
 package lotto.validator;
 
+import lotto.domain.Lotto;
 import lotto.exception.ExceptionMessage;
-
-import java.util.List;
 
 import static lotto.domain.LottoRule.END_INCLUSIVE_OF_NUMBER;
 import static lotto.domain.LottoRule.START_INCLUSIVE_OF_NUMBER;
@@ -19,19 +18,19 @@ public class NumberValidator {
         }
     }
 
-    public static void validateBonusNumber(List<Integer> winningNumber, int bonusNumber) {
+    public static void validateBonusNumber(Lotto winningNumber, int bonusNumber) {
         validateNumberRange(bonusNumber);
         validateDuplicateWithWinningNumber(winningNumber, bonusNumber);
 
     }
 
-    private static void validateDuplicateWithWinningNumber(List<Integer> winningNumber, int bonusNumber) {
+    private static void validateDuplicateWithWinningNumber(Lotto winningNumber, int bonusNumber) {
         if (isDuplicatedWith(winningNumber, bonusNumber)) {
             throw ExceptionMessage.DUPLICATED_LOTTO_NUMBER.getException();
         }
     }
 
-    private static boolean isDuplicatedWith(List<Integer> winningNumber, int number) {
-        return winningNumber.stream().anyMatch(num -> num.equals(number));
+    private static boolean isDuplicatedWith(Lotto winningNumber, int number) {
+        return winningNumber.getNumbers().stream().anyMatch(num -> num.equals(number));
     }
 }

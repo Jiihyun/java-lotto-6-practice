@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.converter.Converter;
+import lotto.domain.Lotto;
 import lotto.domain.PurchaseAmount;
 import lotto.domain.WinningNumbers;
 import lotto.io.reader.Reader;
@@ -32,14 +33,17 @@ public class InputView {
     }
 
     public WinningNumbers readWinningNumbers() {
-        List<Integer> winningNumber = retryHandler.retryUntilSuccess(this::getWinningNumber);
-        Integer bonusNumber = retryHandler.retryUntilSuccess(this::getBonusNumber);
-        return new WinningNumbers(winningNumber, bonusNumber);
+        Lotto winningNumber = retryHandler.retryUntilSuccess(this::getWinningNumber);
+        return retryHandler.retryUntilSuccess(() -> {
+            int bonusNumber = getBonusNumber();
+            return new WinningNumbers(winningNumber, bonusNumber);
+        });
     }
 
-    private List<Integer> getWinningNumber() {
+    private Lotto getWinningNumber() {
         writer.writeln(INPUT_WINNING_NUMBER_MSG.getMessage());
-        return Converter.convertToList(reader.readLine());
+        List<Integer> numbers = Converter.convertToList(reader.readLine());
+        return new Lotto(numbers);
     }
 
     private int getBonusNumber() {

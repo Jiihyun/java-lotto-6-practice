@@ -13,17 +13,17 @@ public class LottoValidator {
 
     public static void validateLotto(List<Integer> numbers) {
         validateLottoSize(numbers);
-        validateRagne(numbers);
+        validateRange(numbers);
         validateDuplicatedNumber(numbers);
     }
 
     private static void validateLottoSize(List<Integer> numbers) {
         if (numbers.size() != LOTTO_SIZE.getValue()) {
-            throw new IllegalArgumentException();
+            throw ExceptionMessage.LOTTO_SIZE.getException();
         }
     }
 
-    private static void validateRagne(List<Integer> numbers) {
+    private static void validateRange(List<Integer> numbers) {
         for (Integer number : numbers) {
             NumberValidator.validateNumberRange(number);
         }
