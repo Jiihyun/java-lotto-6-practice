@@ -75,14 +75,14 @@
 
 ## 요구사항
 
-- [] indent depth 2이하
-- [] 메서드 길이 최대 15라인
-- [] Java Enum 사용
-- [] 도메인 로직 단위 테스트 작성
-- [] Random 값 추출은 `camp.nextstep.edu.missionutils.Randoms`의 `pickUniqueNumbersInRange()` 활용
-- [] 사용자 입력값은 `camp.nextstep.edu.missionutils.Console`의 `readLine()` 활용
-- [] 제공된 `Lotto` 클래스 활용
-- [] `Lotto`클래스 내 `numbers`의 접근 제어자인 private을 변경x
-- [] `Lotto`에 필드(인스턴스 변수)를 추가x
-- [] 변수 이름에 자료형 사용하지 않기
-- [] 구현순서 (상수-인스턴스변수-생성자-메서드)
+- indent depth 2이하
+- 메서드 길이 최대 15라인
+- Java Enum 사용
+- 도메인 로직 단위 테스트 작성
+- Random 값 추출은 `camp.nextstep.edu.missionutils.Randoms`의 `pickUniqueNumbersInRange()` 활용
+- 사용자 입력값은 `camp.nextstep.edu.missionutils.Console`의 `readLine()` 활용
+- 제공된 `Lotto` 클래스 활용
+- `Lotto`클래스 내 `numbers`의 접근 제어자인 private을 변경x
+- `Lotto`에 필드(인스턴스 변수)를 추가x
+- 변수 이름에 자료형 사용하지 않기
+- 구현순서 (상수-인스턴스변수-생성자-메서드)
