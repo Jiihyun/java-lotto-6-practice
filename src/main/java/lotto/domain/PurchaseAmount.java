@@ -3,7 +3,7 @@ package lotto.domain;
 import lotto.validator.PurchaseAmountValidator;
 
 public class PurchaseAmount {
-    private static final int LOTTO_PRICE = 1_000;
+    public static final int LOTTO_PRICE = 1_000;
     private final int purchaseAmount;
 
     public PurchaseAmount(int purchaseAmount) {

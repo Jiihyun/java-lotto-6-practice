@@ -9,7 +9,7 @@ public enum LottoRank {
     THIRD(1_500_000, 5),
     FOURTH(50_000, 4),
     FIFTH(5_000, 3);
-    private static final List<LottoRank> results = List.of(values());
+    private static final List<LottoRank> results = List.of(FIRST, THIRD, FOURTH, FIFTH);
     private final int prizeAmount;
     private final int matchingNumber;
 
