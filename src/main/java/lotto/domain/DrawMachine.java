@@ -8,16 +8,18 @@ import java.util.Map;
 public class DrawMachine {
     private final Map<LottoRank, Integer> statistics;
     private final WinningNumbers winningNumbers;
-    private double totalPrizeAmount = 0;
-    private double totalPurchasedAmount = 0;
+    private final RateOfReturnCalculator rateOfReturnCalculator;
 
-    public DrawMachine(Map<LottoRank, Integer> statistics, WinningNumbers winningNumbers) {
+    private DrawMachine(Map<LottoRank, Integer> statistics, WinningNumbers winningNumbers, RateOfReturnCalculator rateOfReturnCalculator) {
         this.statistics = statistics;
         this.winningNumbers = winningNumbers;
+        this.rateOfReturnCalculator = rateOfReturnCalculator;
     }
 
     public static DrawMachine from(WinningNumbers winningNumbers) {
-        return new DrawMachine(createStatistics(), winningNumbers);
+        return new DrawMachine(createStatistics(),
+                winningNumbers,
+                new RateOfReturnCalculator());
     }
 
     private static Map<LottoRank, Integer> createStatistics() {
@@ -29,8 +31,6 @@ public class DrawMachine {
     }
 
     public DrawResultsResponse drawAll(PurchasedLottos purchasedLottos) {
-        Map<LottoRank, Integer> statistics = createStatistics();
-
         for (Lotto purchasedLottoNumber : purchasedLottos.getPurchasedLottoNumbers()) {
             updateStatistics(statistics, purchasedLottoNumber);
         }
@@ -40,25 +40,19 @@ public class DrawMachine {
                 statistics.get(LottoRank.THIRD),
                 statistics.get(LottoRank.SECOND),
                 statistics.get(LottoRank.FIRST),
-                getRateOfReturn());
+                rateOfReturnCalculator.calculateRateOfReturn());
     }
 
 
     private void updateStatistics(Map<LottoRank, Integer> statistics, Lotto purchasedLottoNumber) {
         LottoRank lottoRank = draw(purchasedLottoNumber);
-        totalPrizeAmount += lottoRank.getPrizeAmount();
-        totalPurchasedAmount += PurchaseAmount.LOTTO_PRICE;
         statistics.put(lottoRank, statistics.get(lottoRank) + 1);
+        rateOfReturnCalculator.updateAmount(lottoRank);
     }
 
-    public LottoRank draw(Lotto purchasedLotto) {
+    private LottoRank draw(Lotto purchasedLotto) {
         int matchingNumber = winningNumbers.getMatchingNumber(purchasedLotto);
         boolean hasBonusNumber = winningNumbers.hasBonusNumber(purchasedLotto);
         return LottoRank.of(matchingNumber, hasBonusNumber);
-    }
-
-    private double getRateOfReturn() {
-        double rateOfReturn = (totalPrizeAmount / totalPurchasedAmount) * 100.0;
-        return Math.round(rateOfReturn * 10.0) / 10.0;
     }
 }
