@@ -25,7 +25,7 @@ public class ProgramController {
 
     private PurchasedLottos purchasedLottos() {
         PurchaseAmount purchaseAmount = inputView.readPurchaseAmount();
-        PurchasedLottos purchasedLottos = PurchasedLottos.from(purchaseAmount.getPurchasedLottoQuantity());
+        PurchasedLottos purchasedLottos = PurchasedLottos.from(purchaseAmount);
         PurchasedLottosResponse purchasedLottosResponse = purchasedLottos.toPurchasedLottosResponse();
         outputView.printPurchasedTicket(purchasedLottosResponse);
         return purchasedLottos;

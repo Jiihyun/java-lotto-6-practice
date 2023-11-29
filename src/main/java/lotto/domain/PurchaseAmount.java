@@ -15,6 +15,4 @@ public class PurchaseAmount {
     public int getPurchasedLottoQuantity() {
         return purchaseAmount / LOTTO_PRICE;
     }
-
-
 }

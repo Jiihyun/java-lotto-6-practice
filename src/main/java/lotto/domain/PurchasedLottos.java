@@ -7,27 +7,26 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class PurchasedLottos {
-    private final int purchasedLottoQuantity;
     private final List<Lotto> purchasedLottoNumbers;
 
-    private PurchasedLottos(int purchasedLottoQuantity, List<Lotto> purchasedLottoNumbers) {
-        this.purchasedLottoQuantity = purchasedLottoQuantity;
+    private PurchasedLottos(List<Lotto> purchasedLottoNumbers) {
         this.purchasedLottoNumbers = purchasedLottoNumbers;
     }
 
-    public static PurchasedLottos from(int purchasedLottoQuantity) {
+    public static PurchasedLottos from(PurchaseAmount purchaseAmount) {
         List<Lotto> purchasedLottoNumbers = Stream.generate(() -> new Lotto(RandomlyLottoNumberGenerator.generate()))
-                .limit(purchasedLottoQuantity)
+                .limit(purchaseAmount.getPurchasedLottoQuantity())
                 .toList();
-        return new PurchasedLottos(purchasedLottoQuantity, purchasedLottoNumbers);
+        return new PurchasedLottos(purchasedLottoNumbers);
     }
 
     //QUESTION: LottoResponse dto 감싸는 거 맞는지
     public PurchasedLottosResponse toPurchasedLottosResponse() {
-        List<LottoResponse> purchasedLottoNumbersResponse = purchasedLottoNumbers.stream()
+        int quantity = purchasedLottoNumbers.size();
+        List<LottoResponse> lottoNumbers = purchasedLottoNumbers.stream()
                 .map(Lotto::toLottoResponse)
                 .toList();
-        return new PurchasedLottosResponse(purchasedLottoQuantity, purchasedLottoNumbersResponse);
+        return new PurchasedLottosResponse(quantity, lottoNumbers);
     }
 
     //QUESTION: 게터 어떻게 없애지
